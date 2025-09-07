@@ -53,7 +53,8 @@ const WrapperText = ({
   };
 
   const defaultClassNames = useMemo(() => getDefaultClassNames(), [type]);
-  const className = `${defaultClassNames} ${classes}`.trim();
+  const className =
+    `text-[var(--theme-primary-400)] ${defaultClassNames} ${classes}`.trim();
 
   return (
     <Tag className={className} {...props}>
