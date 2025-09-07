@@ -1,7 +1,15 @@
 @import "tailwindcss";
+@import "./assets/styles/globalColors.scss";
 
 * {
   font-family: "Beiruti", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+body {
+  background-color: var(--theme-base-dark);
+  color: var(--theme-primary-400);
 }

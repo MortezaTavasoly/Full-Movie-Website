@@ -1,0 +1,63 @@
+:root {
+  // (Base Colors)
+
+  --theme-base-white: #ffffff;
+  --theme-base-light: #f6f7fa;
+
+  --theme-base-dark: #000014;
+  --theme-base-black: #000000;
+
+  // (Primary)
+  --theme-primary-50: #fff9e6;
+  --theme-primary-100: #ffefcc;
+  --theme-primary-200: #ffdf99;
+  --theme-primary-300: #ffcf66;
+  --theme-primary-400: #ffbf33;
+  --theme-primary-500: #ffd700;
+  --theme-primary-600: #ccac00;
+  --theme-primary-700: #998100;
+  --theme-primary-800: #665600;
+  --theme-primary-900: #332b00;
+
+  //  (Secondary)
+  --theme-secondary-100: #e6f0ff;
+  --theme-secondary-200: #b3d4ff;
+  --theme-secondary-300: #80b8ff;
+  --theme-secondary-400: #4d9cff;
+  --theme-secondary-500: #1a80ff;
+  --theme-secondary-600: #0066cc;
+  --theme-secondary-700: #004d99;
+  --theme-secondary-800: #003366;
+  --theme-secondary-900: #001a33;
+
+  // (Success)
+  --theme-success-50: #e6fff2;
+  --theme-success-100: #ccffe6;
+  --theme-success-200: #99ffcd;
+  --theme-success-300: #66ffb3;
+  --theme-success-400: #33ff9a;
+  --theme-success-500: #00cc66;
+  --theme-success-600: #00994d;
+  --theme-success-700: #006633;
+  --theme-success-800: #00331a;
+  --theme-success-900: #001a0d;
+
+  // (Warning)
+  --theme-warning-500: #ffa500;
+  --theme-warning-600: #cc8400;
+  --theme-warning-700: #996300;
+  --theme-warning-800: #664200;
+  --theme-warning-900: #332100;
+
+  // (Error)
+  --theme-error-50: #ffe6e6;
+  --theme-error-100: #ffcccc;
+  --theme-error-200: #ff9999;
+  --theme-error-300: #ff6666;
+  --theme-error-400: #ff3333;
+  --theme-error-500: #cc0000;
+  --theme-error-600: #990000;
+  --theme-error-700: #660000;
+  --theme-error-800: #330000;
+  --theme-error-900: #1a0000;
+}
