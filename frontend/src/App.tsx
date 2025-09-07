@@ -1,3 +1,4 @@
+
 import "@/assets/styles/globalColors.scss";
 import Home from "./pages/home/Home";
 
