@@ -1,23 +1,15 @@
 import { WrapperText } from "@/components/ui/atoms/wrapperText";
 import React, { useState, useEffect, useCallback } from "react";
-
-interface Movie {
-  id: number;
-  title: string;
-  imageUrl: string;
-}
-
-interface CarouselProps {
-  movies: Movie[];
-  autoPlayInterval?: number;
-}
-
+import type { CarouselProps } from "./types";
+import { WrapperChip } from "@/components/ui/atoms/wrapperChip";
+import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import GradeIcon from "@mui/icons-material/Grade";
 const Carousel: React.FC<CarouselProps> = ({
   movies,
   autoPlayInterval = 3000,
 }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAutoPlay, setIsAutoPlay] = useState(true);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [isAutoPlay, setIsAutoPlay] = useState<boolean>(true);
 
   const goToNext = useCallback(() => {
     setCurrentIndex((prevIndex) =>
@@ -45,7 +37,7 @@ const Carousel: React.FC<CarouselProps> = ({
     return () => clearTimeout(timer);
   }, [currentIndex, isAutoPlay, autoPlayInterval, goToNext]);
 
-  const handleUserInteraction = () => {
+  const handleUserInteraction = (): void => {
     setIsAutoPlay(false);
 
     setTimeout(() => {
@@ -60,24 +52,55 @@ const Carousel: React.FC<CarouselProps> = ({
           className="flex h-full transition-transform duration-500 ease-in-out"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
-          {movies.map((movie) => (
-            <div key={movie.id} className="flex-shrink-0 w-full relative">
-              <img
-                src={movie.imageUrl}
-                alt={movie.title}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute bottom-40 left-30 w-50 shadow-[0px_30px_100px_100px_var(--theme-base-black)]/65" />
-
-              <div className="absolute bottom-30 left-20 !p-5">
-                <WrapperText
-                  classes="z-10 font-bold text-left "
-                  text={movie.title}
-                  type={{ name: "title", level: 1 }}
+          {movies.map((movie) => {
+            return (
+              <div key={movie.id} className="flex-shrink-0 w-full relative">
+                <img
+                  src={movie.imageUrl}
+                  alt={movie.title}
+                  className="w-full h-full object-cover"
                 />
+                <div className="relative bottom-50 left-20 w-fit !p-5">
+                  <div className="absolute bottom-20 left-5 w-full shadow-[0px_40px_70px_100px_var(--theme-base-black)]/80" />
+
+                  <WrapperText
+                    className="relative flex flex-col text-left text-[var(--theme-primary-100)]"
+                    text={movie.title}
+                    type={{ name: "title", level: 1 }}
+                  />
+                  <div className="flex gap-5 !mt-2">
+                    <WrapperText
+                      className="relative flex flex-row-reverse justify-center items-center gap-1 text-[var(--theme-gray-400)] w-fit"
+                      text={movie.rating}
+                      type={{ name: "caption", level: 1 }}
+                    >
+                      <GradeIcon />
+                    </WrapperText>
+                    <WrapperText
+                      className="relative flex flex-row-reverse justify-center items-center gap-1 text-[var(--theme-gray-400)] w-fit"
+                      text={movie.releaseDate}
+                      type={{ name: "caption", level: 1 }}
+                    >
+                      <CalendarTodayIcon fontSize="small" />
+                    </WrapperText>
+                  </div>
+                  {movie?.genres?.length > 0 &&
+                    movie?.genres?.map((genre, index) => {
+                      return (
+                        <WrapperChip
+                          key={index + 1}
+                          text={genre}
+                          size="small"
+                          className="relative top-2 !ml-1"
+                          varient="black"
+                          type="outlined"
+                        />
+                      );
+                    })}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         <button
@@ -129,9 +152,9 @@ const Carousel: React.FC<CarouselProps> = ({
         </button>
 
         <div className="absolute bottom-7 left-1/2 -translate-x-1/2 flex gap-3">
-          {movies.map((_, index) => (
+          {movies.map((item, index) => (
             <button
-              key={index}
+              key={item.id}
               className={`w-3 h-3 rounded-full shadow-[inset_0px_0px_1px_1px_var(--theme-primary-700)] opacity-45 transition-all duration-300 cursor-pointer ${
                 index === currentIndex
                   ? "bg-[var(--theme-primary-500)] scale-125"

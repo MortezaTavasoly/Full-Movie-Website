@@ -1,17 +1,18 @@
 // src/components/WrapperText.tsx
-import { useMemo } from "react";
+import React, { useMemo } from "react";
 import type { TextWrapperProps } from "./types";
 
 const WrapperText = ({
   as: Tag = "span",
   text,
-  classes = "",
-  type,
+  className = "",
+  type = { name: "body", level: 2, weight: "medium" },
+  children,
   ...props
 }: TextWrapperProps) => {
   const getDefaultClassNames = () => {
     switch (type.name) {
-      case "headline":
+      case "heading":
         if (type.level === 1) {
           return "!text-[3.5rem] rtl:leading-[84px] ltr:leading-[66px] tracking-[0]";
         } else if (type.level === 2) {
@@ -40,7 +41,6 @@ const WrapperText = ({
         break;
       case "caption":
         if (type.level === 1) {
-          console.log(type);
           return "!text-[0.75rem] rtl:leading-[18px] ltr:leading-[16px] tracking-[0]";
         } else if (type.level === 2) {
           return "!text-[0.625rem] rtl:leading-[15px] ltr:leading-[12px] tracking-[0]";
@@ -53,12 +53,12 @@ const WrapperText = ({
   };
 
   const defaultClassNames = useMemo(() => getDefaultClassNames(), [type]);
-  const className =
-    `text-[var(--theme-primary-400)] ${defaultClassNames} ${classes}`.trim();
+  const classNameResult = `${defaultClassNames} ${className}`.trim();
 
   return (
-    <Tag className={className} {...props}>
+    <Tag className={classNameResult} {...props}>
       {text}
+      {children}
     </Tag>
   );
 };
