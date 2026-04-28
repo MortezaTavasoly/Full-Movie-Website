@@ -4,32 +4,33 @@
   --theme-base-white: #ffffff;
   --theme-base-light: #f6f7fa;
 
-  --theme-base-dark: #000014;
+  --theme-base-dark: #0a0b0f;
   --theme-base-black: #000000;
 
   // (Primary)
-  --theme-primary-50: #fff9e6;
-  --theme-primary-100: #fffdcc;
-  --theme-primary-200: #fffc99;
-  --theme-primary-300: #fff766;
-  --theme-primary-400: #fff133;
-  --theme-primary-500: #ffd700;
-  --theme-primary-550: #e1c526;
-  --theme-primary-600: #ccac00;
-  --theme-primary-700: #998100;
-  --theme-primary-800: #665600;
-  --theme-primary-900: #332b00;
+  --theme-primary-50: #fafafa;
+  --theme-primary-100: #e4e4e7;
+  --theme-primary-200: #e4e4e7;
+  --theme-primary-300: #d4d4d8;
+  --theme-primary-400: #9f9fa9;
+  --theme-primary-500: #71717b;
+  --theme-primary-550: #606069;
+  --theme-primary-600: #52525c;
+  --theme-primary-700: #3f3f46;
+  --theme-primary-800: #27272a;
+  --theme-primary-900: #18181b;
+  --theme-primary-950: #0c0a09;
 
   //  (Secondary)
   --theme-secondary-100: #e6f0ff;
-  --theme-secondary-200: #b3d4ff;
-  --theme-secondary-300: #80b8ff;
-  --theme-secondary-400: #4d9cff;
-  --theme-secondary-500: #1a80ff;
-  --theme-secondary-600: #0066cc;
-  --theme-secondary-700: #004d99;
-  --theme-secondary-800: #003366;
-  --theme-secondary-900: #001a33;
+  --theme-secondary-200: #b3c2ff;
+  --theme-secondary-300: #8099ff;
+  --theme-secondary-400: #4d7cff;
+  --theme-secondary-500: #1a5bff;
+  --theme-secondary-600: #0030cc;
+  --theme-secondary-700: #0f0099;
+  --theme-secondary-800: #030066;
+  --theme-secondary-900: #010033;
 
   // (Success)
   --theme-success-50: #e6fff2;
@@ -58,8 +59,8 @@
   --theme-error-50: #ffe6e6;
   --theme-error-100: #ffcccc;
   --theme-error-200: #ff9999;
-  --theme-error-300: #ff6666;
-  --theme-error-400: #ff3333;
+  --theme-error-300: #ff4949;
+  --theme-error-400: #ff2121;
   --theme-error-500: #ff0000;
   --theme-error-550: #cc0000;
   --theme-error-600: #990000;
@@ -67,7 +68,7 @@
   --theme-error-800: #330000;
   --theme-error-900: #1a0000;
 
-  // (gray)
+  // (Gray)
   --theme-gray-50: #fafafa;
   --theme-gray-100: #f5f5f5;
   --theme-gray-200: #eeeeee;
@@ -78,4 +79,61 @@
   --theme-gray-700: #616161;
   --theme-gray-800: #424242;
   --theme-gray-900: #212121;
+
+  --background: hsl(230 20% 5%);
+  --foreground: hsl(0 0% 95%);
+
+  --card: hsl(230 18% 8%);
+  --card-foreground: hsl(0 0% 95%);
+
+  --popover: hsl(230 18% 10%);
+  --popover-foreground: hsl(0 0% 95%);
+
+  --primary: #dc2828;
+  --primary-foreground: hsl(0 0% 100%);
+
+  --secondary: hsl(230 15% 15%);
+  --secondary-foreground: hsl(0 0% 90%);
+
+  --muted: hsl(230 12% 18%);
+  --muted-foreground: #818598;
+
+  --accent: hsl(38 92% 50%);
+  --accent-foreground: hsl(0 0% 5%);
+
+  --destructive: hsl(0 84.2% 6) 0.2%;
+  --destructive-foreground: hsl(210 40% 98%);
+
+  --border: hsl(230 15% 18%);
+  --input: hsl(230 15% 18%);
+  --ring: hsl(0 72% 51%);
+
+  --radius: 0.75rem;
+
+  --sidebar-background: hsl(230 20% 5%);
+  --sidebar-foreground: hsl(0 0% 95%);
+  --sidebar-primary: hsl(0 72% 51%);
+  --sidebar-primary-foreground: hsl(0 0% 100%);
+  --sidebar-accent: hsl(230 15% 15%);
+  --sidebar-accent-foreground: hsl(0 0% 95%);
+  --sidebar-border: hsl(230 15% 18%);
+  --sidebar-ring: hsl(0 72% 51%);
+
+  /* Custom tokens */
+  --gold: hsl(38 92% 50%);
+  --gold-foreground: hsl(0 0% 5%);
+  --surface: hsl(230 18% 10%);
+  --surface-hover: hsl(230 16% 14%);
+  --glass: hsl(230 20% 8%) / 0.8;
+  --gradient-hero: linear-gradient(
+    180deg,
+    transparent 0%,
+    hsl(230 20% 5%) 100%
+  );
+  --gradient-card: linear-gradient(
+    135deg,
+    hsl(230 18% 10%) 0%,
+    hsl(230 20% 6%) 100%
+  );
+  --shadow-glow: 0 0 30px hsl(0 72% 51% / 0.15);
 }
