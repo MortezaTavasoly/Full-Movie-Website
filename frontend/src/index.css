@@ -1,15 +1,25 @@
 @import "tailwindcss";
 @import "./assets/styles/globalColors.scss";
-
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
 * {
-  font-family: "Beiruti", sans-serif;
+  font-family: "Segoe UI", "Times New Roman", Times, serif;
+  font-weight: 500;
   font-optical-sizing: auto;
   font-style: normal;
   margin: 0;
   padding: 0;
   border: 0;
 }
+
 body {
   background-color: var(--theme-base-dark);
-  color: var(--theme-primary-400);
+  color: var(--theme-gray-300);
 }
