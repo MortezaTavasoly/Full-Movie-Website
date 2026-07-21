@@ -1,30 +1,35 @@
-import { WrapperText } from "@/components/ui/atoms/wrapperText";
+import { Link } from "react-router-dom";
+
+import { WrapperText } from "@/components/ui/atoms/WrapperText";
 
 const CategoryMenu = () => {
   return (
-    <div className="flex justify-between items-center gap-4 ">
+    <div className="flex justify-between items-center gap-4">
+      <Link to="/">
+        <WrapperText
+          className="cursor-pointer hover:text-[var(--theme-primary-200)] transition"
+          type={{ name: "title", level: 3 }}
+          text="Home Page"
+        />
+      </Link>
+
       <WrapperText
-        classes="cursor-pointer"
-        type={{ name: "title", level: 3 }}
-        text="Home Page"
-      />
-      <WrapperText
-        classes="cursor-pointer"
+        className="cursor-pointer hover:text-[var(--theme-primary-200)] transition"
         type={{ name: "title", level: 3 }}
         text="Movies"
       />
       <WrapperText
-        classes="cursor-pointer"
+        className="cursor-pointer hover:text-[var(--theme-primary-200)] transition"
         type={{ name: "title", level: 3 }}
         text="Series"
       />
       <WrapperText
-        classes="cursor-pointer"
+        className="cursor-pointer hover:text-[var(--theme-primary-200)] transition"
         type={{ name: "title", level: 3 }}
         text="New and Popular"
       />
       <WrapperText
-        classes="cursor-pointer"
+        className="cursor-pointer hover:text-[var(--theme-primary-200)] transition"
         type={{ name: "title", level: 3 }}
         text="My List"
       />

@@ -4,13 +4,14 @@ import type { JSX } from "react";
 export type Tags = keyof JSX.IntrinsicElements;
 
 export interface TextWrapperProps {
-  text?: string;
+  text: string | number;
   as?: Tags;
-  classes?: string;
-  type: THeadline | TTitle | TBody | TCaption;
+  className?: string;
+  type?: THeadline | TTitle | TBody | TCaption;
+  children?: React.ReactNode;
 }
 export type THeadline = {
-  name: "headline";
+  name: "heading";
   level: 1 | 2 | 3 | 4;
   weight?: "bold" | "medium" | "regular";
 };

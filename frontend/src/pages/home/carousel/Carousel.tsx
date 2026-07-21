@@ -1,9 +1,15 @@
-import { WrapperText } from "@/components/ui/atoms/wrapperText";
+import { WrapperText } from "@/components/ui/atoms/WrapperText";
 import React, { useState, useEffect, useCallback } from "react";
-import type { CarouselProps } from "./types";
-import { WrapperChip } from "@/components/ui/atoms/wrapperChip";
-import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
-import GradeIcon from "@mui/icons-material/Grade";
+import type { CarouselProps, Movie, TRating } from "./types";
+import { WrapperChip } from "@/components/ui/atoms/WrapperChip";
+import { FaImdb } from "react-icons/fa";
+import { SiRottentomatoes } from "react-icons/si";
+import { CiCalendar } from "react-icons/ci";
+import { WrapperButton, WrapperImage } from "@/components/ui/atoms";
+import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
+import { Link } from "react-router-dom";
+import { IoPlay } from "react-icons/io5";
+
 const Carousel: React.FC<CarouselProps> = ({
   movies,
   autoPlayInterval = 3000,
@@ -11,15 +17,26 @@ const Carousel: React.FC<CarouselProps> = ({
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [isAutoPlay, setIsAutoPlay] = useState<boolean>(true);
 
+  const handleRatings = (movie: Movie, value: string): number | string => {
+    const ratingResult = movie?.ratings?.find((rate: TRating) => {
+      return rate.name.toLowerCase() === value.toLowerCase();
+    });
+    if (ratingResult) {
+      return ratingResult.rating;
+    } else {
+      return "---";
+    }
+  };
+
   const goToNext = useCallback(() => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === movies.length - 1 ? 0 : prevIndex + 1
+      prevIndex === movies.length - 1 ? 0 : prevIndex + 1,
     );
   }, [movies.length]);
 
   const goToPrev = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? movies.length - 1 : prevIndex - 1
+      prevIndex === 0 ? movies.length - 1 : prevIndex - 1,
     );
   };
 
@@ -46,7 +63,7 @@ const Carousel: React.FC<CarouselProps> = ({
   };
 
   return (
-    <div className="relative w-full mx-auto overflow-hidden shadow-xl max-h-fit">
+    <div className="relative w-full mx-auto overflow-hidden  max-h-fit">
       <div className="relative h-80 md:h-96 lg:h-[500px]">
         <div
           className="flex h-full transition-transform duration-500 ease-in-out"
@@ -55,115 +72,120 @@ const Carousel: React.FC<CarouselProps> = ({
           {movies.map((movie) => {
             return (
               <div key={movie.id} className="flex-shrink-0 w-full relative">
-                <img
-                  src={movie.imageUrl}
-                  alt={movie.title}
-                  className="w-full h-full object-cover"
+                <WrapperImage
+                  address={movie.wideImageUrl}
+                  name={movie.title}
+                  className="w-full h-full object-cover pointer-events-none select-none"
                 />
-                <div className="relative bottom-50 left-20 w-fit !p-5">
-                  <div className="absolute bottom-20 left-5 w-full shadow-[0px_40px_70px_100px_var(--theme-base-black)]/80" />
 
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent from-50% via-[var(--theme-base-dark)]/40 via-60% to-[var(--theme-base-dark)] to-100% "></div>
+                <div className="relative flex flex-col gap-3 bottom-60 left-20 w-fit !p-5">
                   <WrapperText
-                    className="relative flex flex-col text-left text-[var(--theme-primary-100)]"
+                    className=" flex flex-col text-left text-[var(--theme-primary-100)]"
                     text={movie.title}
                     type={{ name: "title", level: 1 }}
                   />
-                  <div className="flex gap-5 !mt-2">
+                  <div className="flex gap-5">
                     <WrapperText
-                      className="relative flex flex-row-reverse justify-center items-center gap-1 text-[var(--theme-gray-400)] w-fit"
-                      text={movie.rating}
+                      className=" flex flex-row-reverse justify-center items-center gap-1 text-[var(--theme-gray-400)] w-fit"
+                      text={handleRatings(movie, "Imdb")}
                       type={{ name: "caption", level: 1 }}
                     >
-                      <GradeIcon />
+                      <FaImdb size={25} color="#ffdf20" />
                     </WrapperText>
                     <WrapperText
-                      className="relative flex flex-row-reverse justify-center items-center gap-1 text-[var(--theme-gray-400)] w-fit"
+                      className=" flex flex-row-reverse justify-center items-center gap-1 text-[var(--theme-gray-400)] w-fit"
+                      text={handleRatings(movie, "Rotten Tomatoes")}
+                      type={{ name: "caption", level: 1 }}
+                    >
+                      <SiRottentomatoes
+                        size={20}
+                        color="var(--theme-error-400)"
+                      />
+                    </WrapperText>
+                    <WrapperText
+                      className=" flex flex-row-reverse justify-center items-center gap-1 text-[var(--theme-gray-400)] w-fit"
                       text={movie.releaseDate}
                       type={{ name: "caption", level: 1 }}
                     >
-                      <CalendarTodayIcon fontSize="small" />
+                      <CiCalendar size={20} />
                     </WrapperText>
                   </div>
-                  {movie?.genres?.length > 0 &&
-                    movie?.genres?.map((genre, index) => {
-                      return (
-                        <WrapperChip
-                          key={index + 1}
-                          text={genre}
-                          size="small"
-                          className="relative top-2 !ml-1"
-                          varient="black"
-                          type="outlined"
-                        />
-                      );
-                    })}
+                  <div>
+                    {movie?.genres?.length > 0 &&
+                      movie?.genres?.map((genre, index) => {
+                        return (
+                          <WrapperChip
+                            key={index + 1}
+                            text={genre}
+                            size="small"
+                            className=" top-2 !mr-1"
+                            varient="black"
+                            type="outlined"
+                          />
+                        );
+                      })}
+                  </div>
+                  <Link
+                    to={`/MovieDetail/${movie.id}`}
+                    className="inline-flex items-center gap-2 rounded-lg bg-primary "
+                  >
+                    <WrapperButton
+                      size="xLarge"
+                      variant="error"
+                      shape="default"
+                      className="!p-3 gap-2"
+                      text="Watch"
+                      onClick={() => console.log("here")}
+                    >
+                      <IoPlay className="w-5 h-5" />
+                    </WrapperButton>
+                  </Link>
                 </div>
               </div>
             );
           })}
         </div>
 
-        <button
-          className="absolute left-2 top-1/2 -translate-y-1/2  bg-[var(--theme-secondary-900)]/20 hover:bg-[var(--theme-secondary-900)]/30 text-[var(--theme-base-light)] cursor-pointer rounded-full w-10 h-10 flex items-center justify-center transition-all duration-300"
+        <WrapperButton
+          shape="rounded"
+          className="w-10 h-10 absolute left-2 top-1/2 -translate-y-1/2 text-[var(--theme-base-light)] cursor-pointer flex items-center justify-center bg-[var(--theme-base-dark)]/10 shadow-lg transition-all opacity-80 hover:opacity-100"
           onClick={() => {
             goToPrev();
             handleUserInteraction();
           }}
           aria-label="Previous slide"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
-        </button>
+          <BiChevronLeft />
+        </WrapperButton>
 
-        <button
-          className="absolute right-2 top-1/2 -translate-y-1/2 bg-[var(--theme-secondary-900)]/20 hover:bg-[var(--theme-secondary-900)]/30 text-[var(--theme-base-light)] cursor-pointer rounded-full w-10 h-10 flex items-center justify-center transition-all duration-300"
+        <WrapperButton
+          shape="rounded"
+          className="w-10 h-10 absolute right-2 top-1/2 -translate-y-1/2 text-[var(--theme-base-light)] cursor-pointer flex items-center justify-center bg-[var(--theme-base-dark)]/10 shadow-lg transition-all opacity-80 hover:opacity-100"
           onClick={() => {
             goToNext();
             handleUserInteraction();
           }}
           aria-label="Next slide"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 5l7 7-7 7"
-            />
-          </svg>
-        </button>
+          <BiChevronRight />
+        </WrapperButton>
 
         <div className="absolute bottom-7 left-1/2 -translate-x-1/2 flex gap-3">
           {movies.map((item, index) => (
-            <button
+            <WrapperButton
+              type="text"
               key={item.id}
-              className={`w-3 h-3 rounded-full shadow-[inset_0px_0px_1px_1px_var(--theme-primary-700)] opacity-45 transition-all duration-300 cursor-pointer ${
+              className={`w-2.5 h-2.5 rounded-full transition-all !p-0 duration-300 ${
                 index === currentIndex
-                  ? "bg-[var(--theme-primary-500)] scale-125"
-                  : "bg-[var(--theme-primary-100)] hover:bg-[var(--theme-primary-400)]"
+                  ? "bg-[var(--theme-error-400)]/80 w-8"
+                  : "bg-[var(--theme-primary-500)]/40 hover:bg-[var(--theme-primary-500)]/60"
               }`}
               onClick={() => {
                 goToSlide(index);
                 handleUserInteraction();
               }}
+              size="small"
               aria-label={`Go to slide ${index + 1}`}
             />
           ))}

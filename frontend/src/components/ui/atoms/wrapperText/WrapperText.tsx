@@ -29,7 +29,7 @@ const WrapperText = ({
         } else if (type.level === 2) {
           return "!text-[1.5rem] rtl:leading-[36px] ltr:leading-[28px] tracking-[0]";
         } else if (type.level === 3) {
-          return "!text-[1.25rem] rtl:leading-[30px] ltr:leading-[24px] tracking-[0]";
+          return "!text-[1.20rem] rtl:leading-[30px] ltr:leading-[24px] tracking-[0]";
         }
         break;
       case "body":

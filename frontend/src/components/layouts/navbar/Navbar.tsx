@@ -1,8 +1,9 @@
 import ShahMovieLogo from "@/assets/logo/logo";
-import { Search } from "@mui/icons-material";
 import CategoryMenu from "./CategoryMenu";
 import ProfileSection from "./ProfileSection";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import SearchSection from "./SearchSection";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
@@ -11,7 +12,7 @@ const Navbar = () => {
     const handleScroll = () => {
       const scrollTop =
         window.pageYOffset || document.documentElement.scrollTop;
-      if (scrollTop > 100) {
+      if (scrollTop > 50) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
@@ -27,14 +28,16 @@ const Navbar = () => {
 
   return (
     <div
-      className={`z-999 flex items-center !p-2 !pb-5 fixed container transition duration-300 ease-linear bg-linear-to-b from-[var(--theme-base-dark)]
-        ${isScrolled && "to-[var(--theme-base-dark)]"}`}
+      className={`w-full z-999 flex items-center !p-2 !pb-5 fixed top-0 transition duration-300 ease-linear bg-linear-to-b from-[var(--theme-base-dark)] !border-[var(--theme-primary-300)]/0
+        ${isScrolled && "to-[var(--theme-base-dark)]/60 backdrop-blur-2xl !border-b !border-[var(--theme-primary-300)]/20 "}`}
     >
-      <ShahMovieLogo />
+      <Link to="/">
+        <ShahMovieLogo />
+      </Link>
       <div className="flex justify-between items-center w-full !p-5 !pb-0 ">
         <CategoryMenu />
-        <div>
-          <Search />
+        <div className="flex gap-2 items-center">
+          {/* <SearchSection /> */}
           <ProfileSection />
         </div>
       </div>

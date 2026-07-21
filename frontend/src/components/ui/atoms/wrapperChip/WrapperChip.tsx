@@ -8,13 +8,16 @@ const WrapperChip: React.FC<TWrapperChipProps> = ({
   size = "medium",
   clickable,
   disabled = false,
+  shape = "regular",
+  children,
+  className,
 }) => {
   const getDefaultClassNames = () => {
     if (!disabled) {
       switch (varient) {
         case "primary":
           if (type === "filled") {
-            return "text-[var(--theme-primary-700)] !bg-[var(--theme-primary-400)] !border-1 !border-[var(--theme-primary-500)]";
+            return "text-[var(--theme-primary-700)] !bg-[var(--theme-primary-200)] !border-1 !border-[var(--theme-primary-500)]/50";
           } else {
             return "text-[var(--theme-primary-550)] !border-1 text-[var(--theme-primary-500)] !border-[var(--theme-primary-600)]";
           }
@@ -46,10 +49,10 @@ const WrapperChip: React.FC<TWrapperChipProps> = ({
           if (type === "filled") {
             return "text-[var(--theme-gray-700)] !bg-[var(--theme-gray-300)] !border-1 !border-[var(--theme-gray-400)]";
           } else {
-            return "!border-1  text-[var(--theme-gray-600)] !border-[var(--theme-gray-500)]";
+            return "!border-1  text-[var(--theme-gray-500)] !border-[var(--theme-gray-500)]";
           }
       }
-    } else {
+    } else if (disabled) {
       if (type === "filled") {
         return "text-[var(--theme-gray-400)] !bg-[var(--theme-gray-100)] !border-1 !border-[var(--theme-gray-200)] cursor-not-allowed blur-[0.6px]";
       } else {
@@ -59,15 +62,16 @@ const WrapperChip: React.FC<TWrapperChipProps> = ({
   };
 
   const defaultClassNames = useMemo(() => getDefaultClassNames(), [type]);
-
+  const getClassesResult = () => {
+    return `${defaultClassNames} ${
+      size === "small" ? "text-[0.7rem]" : "text-[0.9rem]"
+    } ${shape === "rounded" ? "rounded-full" : "rounded-md"} ${
+      clickable && "!cursor-pinter"
+    } w-fith-fit !p-1 ${className}`;
+  };
   return (
-    <span
-      className={`${defaultClassNames} ${
-        size === "small"
-          ? "text-[0.8rem] !px-2 rounded-md"
-          : "text-[1rem] !px-2 rounded-lg"
-      } ${clickable && "!cursor-pinter"} w-fit h-fit`}
-    >
+    <span className={getClassesResult()}>
+      {children}
       {text}
     </span>
   );

@@ -1,7 +1,6 @@
-export interface Movie {
+export interface TMovie {
   id: number;
   title: string;
-  wideImageUrl: string;
   imageUrl: string;
   director: string[];
   language: string[];
@@ -15,7 +14,7 @@ export interface TRating {
   name: string;
   rating: number;
 }
-export interface CarouselProps {
-  movies: Movie[];
-  autoPlayInterval?: number;
+
+export interface TMovieProps {
+  movies: TMovie[];
 }
